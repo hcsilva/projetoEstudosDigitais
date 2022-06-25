@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,50 +21,54 @@ public class Empresa implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "razao_social", length = 150)
+    @Column(name = "RAZAO_SOCIAL", length = 150)
     private String razaoSocial;
 
-    @Column(name = "cnpj")
+    @Column(name = "CNPJ")
     private Integer cnpj;
 
-    @Column(name = "logo")
+    @Column(name = "LOGO")
     @Lob
     private byte[] logo;
 
-    @Column(name = "imagem_capa")
+    @Column(name = "IMAGEM_CAPA")
     @Lob
     private byte[] imagemCapa;
 
-    @Column(name = "descricao", length = 300)
+    @Column(name = "DESCRICAO", length = 300)
     private String descricao;
 
-    @Column(name = "site", length = 100)
+    @Column(name = "SITE", length = 100)
     private String site;
 
-    @Column(name = "instagram", length = 100)
+    @Column(name = "INSTAGRAM", length = 100)
     private String instagram;
 
-    @Column(name = "facebook", length = 100)
+    @Column(name = "FACEBOOK", length = 100)
     private String facebook;
 
-    @Column(name = "whatsapp", length = 20)
+    @Column(name = "WHATSAPP", length = 20)
     private String whatsapp;
 
     @NotNull
-    @Column(name = "telefone_contato", length = 100)
+    @Column(name = "TELEFONE_CONTATO", length = 100)
     private String telefoneContato;
 
     @NotNull
-    @Column(name = "email", length = 50)
+    @Column(name = "EMAIL", length = 50)
     private String email;
 
     @NotNull
-    @Column(name = "idioma", length = 5)
+    @Column(name = "IDIOMA", length = 5)
     private String idioma;
 
     @NotNull
-    @Column(name = "fuso", length = 10)
+    @Column(name = "FUSO", length = 10)
     private String fusoHorario;
+
+    @NotNull
+    @Column(name = "DATA_CRIACAO")
+    private LocalDateTime dataCriacaoRegistro;
 
     public Empresa() {
         this.idioma = "pt-BR";

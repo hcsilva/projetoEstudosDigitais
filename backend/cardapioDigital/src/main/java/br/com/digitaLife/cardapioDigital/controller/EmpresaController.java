@@ -3,6 +3,7 @@ package br.com.digitaLife.cardapioDigital.controller;
 import br.com.digitaLife.cardapioDigital.dto.EmpresaDto;
 import br.com.digitaLife.cardapioDigital.model.Empresa;
 import br.com.digitaLife.cardapioDigital.service.EmpresaService;
+import br.com.digitaLife.cardapioDigital.utils.MessageUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,8 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("api/empresa")
@@ -28,6 +30,7 @@ public class EmpresaController {
     public ResponseEntity<Object> saveEmpresa(@RequestBody @Valid EmpresaDto empresaDto) {
         var empresaModel = new Empresa();
         BeanUtils.copyProperties(empresaDto, empresaModel);
+        empresaModel.setDataCriacaoRegistro(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaService.save(empresaModel));
     }
 
@@ -38,13 +41,10 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable(value = "id") Long id) {
-        ResourceBundle bundle = ResourceBundle.getBundle("messages");
         Optional<Empresa> empresaOptional = empresaService.findById(id);
         if (!empresaOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bundle.getString("empresa.naoEncontrada"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
         }
         return ResponseEntity.status(HttpStatus.OK).body(empresaOptional.get());
     }
-
-
 }
