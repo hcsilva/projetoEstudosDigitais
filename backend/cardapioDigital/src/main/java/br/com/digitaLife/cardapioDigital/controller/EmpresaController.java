@@ -35,16 +35,41 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Empresa>> getAllEmpresas(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Page<Empresa>> findAllEmpresas(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
         Optional<Empresa> empresaOptional = empresaService.findById(id);
         if (!empresaOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
         }
         return ResponseEntity.status(HttpStatus.OK).body(empresaOptional.get());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
+        Optional<Empresa> empresaOptional = empresaService.findById(id);
+        if (!empresaOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") Long id, @RequestBody @Valid EmpresaDto empresaDto) {
+        Optional<Empresa> empresaOptional = empresaService.findById(id);
+        if (!empresaOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
+        }
+
+        var empresaModel = new Empresa();
+        BeanUtils.copyProperties(empresaDto, empresaModel);
+        empresaModel.setId(empresaOptional.get().getId());
+
+        return ResponseEntity.status(HttpStatus.OK).body(empresaService.save(empresaModel));
+    }
+
 }
