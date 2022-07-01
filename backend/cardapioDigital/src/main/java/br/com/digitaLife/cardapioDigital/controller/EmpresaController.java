@@ -27,7 +27,7 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @PostMapping
-    public ResponseEntity<Object> saveEmpresa(@RequestBody @Valid EmpresaDto empresaDto) {
+    public ResponseEntity<Empresa> saveEmpresa(@RequestBody @Valid EmpresaDto empresaDto) {
         var empresaModel = new Empresa();
         BeanUtils.copyProperties(empresaDto, empresaModel);
         empresaModel.setDataCriacaoRegistro(LocalDateTime.now(ZoneId.of("UTC")));
