@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -33,6 +34,7 @@ public class EmpresaDto {
     private String telefoneContato;
 
     @NotBlank
+    @NotNull
     @Email
     private String email;
 
