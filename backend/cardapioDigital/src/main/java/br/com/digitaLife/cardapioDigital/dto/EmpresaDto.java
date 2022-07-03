@@ -2,18 +2,21 @@ package br.com.digitaLife.cardapioDigital.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 public class EmpresaDto {
 
-    @NotBlank
+    @NotEmpty(message = "{empresa.razaoSocial.campoObrigatorio}")
     private String razaoSocial;
 
+    @CNPJ(message =  "{empresa.cnpj.invalido}")
     private String cnpj;
 
     private byte[] logo;
@@ -30,12 +33,11 @@ public class EmpresaDto {
 
     private String whatsapp;
 
-    @NotBlank
+    @NotBlank(message = "{empresa.telefoneContato.campoObrigatorio}")
     private String telefoneContato;
 
-    @NotBlank
-    @NotNull
-    @Email
+    @Email(message = "{empresa.email.invalido}")
+    @NotBlank(message = "{empresa.email.campoObrigatorio}")
     private String email;
 
 }

@@ -15,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class EmpresaControllerTest {
 

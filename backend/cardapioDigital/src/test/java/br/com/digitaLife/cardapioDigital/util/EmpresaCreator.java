@@ -11,7 +11,7 @@ public class EmpresaCreator {
         EmpresaDto empresaDto = new EmpresaDto();
         empresaDto.setCnpj("09464292000198");
         empresaDto.setDescricao("Empresa Teste Descrição");
-        // empresaDto.setEmail("emailTeste@gmail.com");
+        empresaDto.setEmail("emailTeste@gmail.com");
         empresaDto.setLogo(getImageBytes());
         empresaDto.setImagemCapa(getImageBytes());
         empresaDto.setFacebook("testeFacebookPage");
