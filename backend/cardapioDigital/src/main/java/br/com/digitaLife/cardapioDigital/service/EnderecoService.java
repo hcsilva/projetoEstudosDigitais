@@ -2,7 +2,6 @@ package br.com.digitaLife.cardapioDigital.service;
 
 import br.com.digitaLife.cardapioDigital.dto.CepDto;
 import br.com.digitaLife.cardapioDigital.dto.EnderecoDto;
-import br.com.digitaLife.cardapioDigital.exceptions.BadRequestException;
 import br.com.digitaLife.cardapioDigital.model.Endereco;
 import br.com.digitaLife.cardapioDigital.repository.EnderecoRepository;
 import br.com.digitaLife.cardapioDigital.utils.ExceptionUtils;
@@ -44,15 +43,11 @@ public class EnderecoService {
         enderecoRepository.delete(endereco);
     }
 
-    public EnderecoDto carregarDadosPeloCep(String cep) {
+    public EnderecoDto findByCep(String cep) {
         validateCep(cep);
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(URL_BASE_VIA_CEP, cep);
         CepDto response = restTemplate.getForObject(url, CepDto.class);
-
-        if (response == null) {
-            ExceptionUtils.throwsErrorExceptionMessage("endereco.cep.cepNaoEncontrado");
-        }
 
         EnderecoDto enderecoDto = new EnderecoDto();
         enderecoDto.setBairro(response.getBairro());

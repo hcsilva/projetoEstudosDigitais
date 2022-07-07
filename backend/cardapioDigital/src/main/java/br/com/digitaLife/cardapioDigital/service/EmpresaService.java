@@ -1,13 +1,18 @@
 package br.com.digitaLife.cardapioDigital.service;
 
+import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
 import br.com.digitaLife.cardapioDigital.model.Empresa;
 import br.com.digitaLife.cardapioDigital.repository.EmpresaRepository;
+import br.com.digitaLife.cardapioDigital.utils.ExceptionUtils;
+import br.com.digitaLife.cardapioDigital.utils.MessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -28,8 +33,11 @@ public class EmpresaService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Empresa> findById(Long id) {
-        return empresaRepository.findById(id);
+    public Empresa findById(Long id) {
+        return empresaRepository.findById(id)
+                .orElseThrow(
+                        () -> new ObjectNotFoundException("empresa.naoEncontrada")
+                );
     }
 
     public void delete(Empresa empresa) {

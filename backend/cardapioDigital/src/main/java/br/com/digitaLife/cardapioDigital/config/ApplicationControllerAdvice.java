@@ -1,6 +1,6 @@
 package br.com.digitaLife.cardapioDigital.config;
 
-import br.com.digitaLife.cardapioDigital.utils.ApiErrors;
+import br.com.digitaLife.cardapioDigital.exceptions.ApiErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

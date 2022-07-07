@@ -41,33 +41,23 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-        Optional<Empresa> empresaOptional = empresaService.findById(id);
-        if (!empresaOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(empresaOptional.get());
+        Empresa empresa = empresaService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(empresa);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
-        Optional<Empresa> empresaOptional = empresaService.findById(id);
-        if (!empresaOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
-        }
-
+        Empresa empresa = empresaService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") Long id, @RequestBody @Valid EmpresaDto empresaDto) {
-        Optional<Empresa> empresaOptional = empresaService.findById(id);
-        if (!empresaOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("empresa.naoEncontrada"));
-        }
+        Empresa empresa = empresaService.findById(id);
 
         var empresaModel = new Empresa();
         BeanUtils.copyProperties(empresaDto, empresaModel);
-        empresaModel.setId(empresaOptional.get().getId());
+        empresaModel.setId(empresa.getId());
 
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.save(empresaModel));
     }
