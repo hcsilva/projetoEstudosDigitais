@@ -2,6 +2,7 @@ package br.com.digitaLife.cardapioDigital.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.constraints.Email;
@@ -16,7 +17,7 @@ public class EmpresaDto {
     @NotEmpty(message = "{empresa.razaoSocial.campoObrigatorio}")
     private String razaoSocial;
 
-    @CNPJ(message =  "{empresa.cnpj.invalido}")
+    @CNPJ(message = "{empresa.cnpj.invalido}")
     private String cnpj;
 
     private byte[] logo;
@@ -27,8 +28,10 @@ public class EmpresaDto {
 
     private String site;
 
+    @URL(message = "{empresa.urlInstragramInvalida}")
     private String instagram;
 
+    @URL(message = "{empresa.urlFacebookInvalida}")
     private String facebook;
 
     private String whatsapp;

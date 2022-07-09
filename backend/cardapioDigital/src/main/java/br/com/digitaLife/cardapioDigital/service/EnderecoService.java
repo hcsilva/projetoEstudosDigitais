@@ -1,7 +1,8 @@
 package br.com.digitaLife.cardapioDigital.service;
 
-import br.com.digitaLife.cardapioDigital.dto.CepDto;
+import br.com.digitaLife.cardapioDigital.dto.CepResponse;
 import br.com.digitaLife.cardapioDigital.dto.EnderecoDto;
+import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
 import br.com.digitaLife.cardapioDigital.model.Endereco;
 import br.com.digitaLife.cardapioDigital.repository.EnderecoRepository;
 import br.com.digitaLife.cardapioDigital.utils.ExceptionUtils;
@@ -13,12 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 public class EnderecoService {
-
     private static final String URL_BASE_VIA_CEP = "https://viacep.com.br/ws/%s/json/";
 
     @Autowired
@@ -34,8 +32,11 @@ public class EnderecoService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Endereco> findById(Long id) {
-        return enderecoRepository.findById(id);
+    public Endereco findById(Long id) {
+        return enderecoRepository.findById(id)
+                .orElseThrow(
+                        () -> new ObjectNotFoundException("endereco.naoEncontrado")
+                );
     }
 
 
@@ -47,7 +48,7 @@ public class EnderecoService {
         validateCep(cep);
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(URL_BASE_VIA_CEP, cep);
-        CepDto response = restTemplate.getForObject(url, CepDto.class);
+        CepResponse response = restTemplate.getForObject(url, CepResponse.class);
 
         EnderecoDto enderecoDto = new EnderecoDto();
         enderecoDto.setBairro(response.getBairro());

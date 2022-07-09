@@ -48,6 +48,7 @@ public class EmpresaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
         Empresa empresa = empresaService.findById(id);
+        empresaService.delete(empresa);
         return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
     }
 

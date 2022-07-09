@@ -42,17 +42,11 @@ public class EnderecoController {
         return ResponseEntity.status(HttpStatus.OK).body(enderecoService.findAll(pageable));
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-        Optional<Endereco> enderecoOptional = enderecoService.findById(id);
-        if (!enderecoOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MessageUtils.getMessage("endereco.naoEncontrado"));
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(enderecoOptional.get());
+        Endereco endereco = enderecoService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(endereco);
     }
-
 
     @GetMapping("/{cep}")
     @ResponseStatus(HttpStatus.OK)
@@ -64,5 +58,23 @@ public class EnderecoController {
         }
 
         return enderecoDto;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteEndereco(@PathVariable(value = "id") Long id) {
+        Endereco endereco = enderecoService.findById(id);
+        enderecoService.delete(endereco);
+
+        return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("endereco.deletadoComSucesso"));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id") Long id, @RequestBody @Valid EnderecoDto enderecoDto) {
+        Endereco endereco = enderecoService.findById(id);
+
+        var enderecoModel = new Endereco();
+        BeanUtils.copyProperties(enderecoDto, enderecoModel);
+        enderecoModel.setId(endereco.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(enderecoService.save(enderecoModel));
     }
 }

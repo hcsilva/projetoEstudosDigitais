@@ -9,8 +9,8 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Entity
 @EqualsAndHashCode
+@Entity
 @Table(name = "ENDERECO")
 public class Endereco extends VersionedEntity implements Serializable {
     private static final long serialVersionUID = 1L;
