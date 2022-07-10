@@ -1,6 +1,7 @@
 package br.com.digitaLife.cardapioDigital.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class HorarioFuncionamento extends VersionedEntity implements Serializabl
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
-    @JsonFormat(pattern = "hh:mm a")
+    @JsonFormat(pattern = "hh:mm")
     @Column(name = "SEGUNDA_INI")
     private LocalTime segundaInicial;
 

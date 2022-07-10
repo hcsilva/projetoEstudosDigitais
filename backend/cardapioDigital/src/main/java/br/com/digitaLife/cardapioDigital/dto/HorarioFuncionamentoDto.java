@@ -1,5 +1,6 @@
 package br.com.digitaLife.cardapioDigital.dto;
 
+import br.com.digitaLife.cardapioDigital.model.Empresa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,6 @@ public class HorarioFuncionamentoDto {
     @NotNull(message = "{horariofuncionamento.empresa.campoObrigatorio}")
     private Long empresa;
 
-    //@JsonFormat(pattern = "hh:mm:ss a")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime segundaInicial;
-
-
 }

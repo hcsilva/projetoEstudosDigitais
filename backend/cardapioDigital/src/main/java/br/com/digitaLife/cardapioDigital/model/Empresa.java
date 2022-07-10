@@ -60,7 +60,6 @@ public class Empresa extends VersionedEntity implements Serializable {
     @Column(name = "FUSO", length = 10)
     private String fusoHorario;
 
-
     public Empresa() {
         this.idioma = "pt-BR";
         this.fusoHorario = "Z";

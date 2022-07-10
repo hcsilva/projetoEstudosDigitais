@@ -35,7 +35,6 @@ public class HorarioFuncionamentoController {
 
         var horarioFuncionamentoModel = new HorarioFuncionamento();
         BeanUtils.copyProperties(horarioFuncionamentoDto, horarioFuncionamentoModel);
-        horarioFuncionamentoModel.setDataCriacaoRegistro(LocalDateTime.now(ZoneId.of("UTC")));
         horarioFuncionamentoModel.setEmpresa(empresa);
         return ResponseEntity.status(HttpStatus.CREATED).body(horarioFuncionamentoService.save(horarioFuncionamentoModel));
     }
