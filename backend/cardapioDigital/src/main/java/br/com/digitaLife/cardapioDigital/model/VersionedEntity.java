@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
+import javax.persistence.PrePersist;
 import java.time.LocalDateTime;
 
 @Getter

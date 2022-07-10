@@ -1,8 +1,7 @@
 package br.com.digitaLife.cardapioDigital.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +10,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @EqualsAndHashCode
+@NoArgsConstructor
 @Entity
 @Table(name = "HORARIO_FUNCIONAMENTO")
 public class HorarioFuncionamento extends VersionedEntity implements Serializable {
@@ -20,10 +20,11 @@ public class HorarioFuncionamento extends VersionedEntity implements Serializabl
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_empresa")
+    @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
+    @JsonFormat(pattern = "hh:mm a")
     @Column(name = "SEGUNDA_INI")
     private LocalTime segundaInicial;
 

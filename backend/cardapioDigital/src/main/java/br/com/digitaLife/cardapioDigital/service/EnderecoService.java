@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@Transactional
 public class EnderecoService {
     private static final String URL_BASE_VIA_CEP = "https://viacep.com.br/ws/%s/json/";
 
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Transactional
     public Endereco save(Endereco endereco) {
         return enderecoRepository.save(endereco);
     }
@@ -40,6 +40,7 @@ public class EnderecoService {
     }
 
 
+    @Transactional
     public void delete(Endereco endereco) {
         enderecoRepository.delete(endereco);
     }

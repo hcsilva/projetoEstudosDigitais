@@ -1,11 +1,14 @@
 package br.com.digitaLife.cardapioDigital.dto;
 
 import br.com.digitaLife.cardapioDigital.enums.PaisEnum;
+import br.com.digitaLife.cardapioDigital.model.Empresa;
+import br.com.digitaLife.cardapioDigital.model.Endereco;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -31,6 +34,9 @@ public class EnderecoDto {
 
     @NotBlank(message = "{endereco.estado.campoObrigatorio}")
     private String estado;
+
+    @NotNull(message = "{endereco.empresa.campoObrigatorio}")
+    private Empresa empresa;
 
     private String pais;
 

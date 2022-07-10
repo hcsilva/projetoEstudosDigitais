@@ -19,7 +19,7 @@ public class Endereco extends VersionedEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 

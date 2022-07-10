@@ -15,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/empresa")
@@ -30,7 +27,6 @@ public class EmpresaController {
     public ResponseEntity<Empresa> saveEmpresa(@RequestBody @Valid EmpresaDto empresaDto) {
         var empresaModel = new Empresa();
         BeanUtils.copyProperties(empresaDto, empresaModel);
-        empresaModel.setDataCriacaoRegistro(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaService.save(empresaModel));
     }
 
