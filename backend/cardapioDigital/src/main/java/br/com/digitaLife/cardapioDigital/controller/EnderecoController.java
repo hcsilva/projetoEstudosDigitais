@@ -48,7 +48,7 @@ public class EnderecoController {
         return ResponseEntity.status(HttpStatus.OK).body(endereco);
     }
 
-    @GetMapping("/{cep}")
+    @GetMapping("/cep/{cep}")
     @ResponseStatus(HttpStatus.OK)
     public EnderecoDto getByCep(@PathVariable(value = "cep") String cep) {
         EnderecoDto enderecoDto = enderecoService.findByCep(cep);
