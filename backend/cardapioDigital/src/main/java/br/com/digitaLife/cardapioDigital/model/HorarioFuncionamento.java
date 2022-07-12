@@ -1,8 +1,10 @@
 package br.com.digitaLife.cardapioDigital.model;
 
+import br.com.digitaLife.cardapioDigital.dto.HorarioFuncionamentoDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,8 +12,9 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "HORARIO_FUNCIONAMENTO")
 public class HorarioFuncionamento extends VersionedEntity implements Serializable {
@@ -110,5 +113,8 @@ public class HorarioFuncionamento extends VersionedEntity implements Serializabl
     @Column(name = "DOMINGO_FIM_2")
     private LocalTime domingoFinal2;
 
+    public HorarioFuncionamentoDto convertEntityToDTO() {
+        return new ModelMapper().map(this, HorarioFuncionamentoDto.class);
+    }
 
 }

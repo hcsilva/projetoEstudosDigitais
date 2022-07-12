@@ -22,21 +22,13 @@ import java.time.ZoneId;
 @RestController
 @RequestMapping("/api/horarioFuncionamento")
 public class HorarioFuncionamentoController {
-
     @Autowired
     private HorarioFuncionamentoService horarioFuncionamentoService;
 
-    @Autowired
-    private EmpresaService empresaService;
-
     @PostMapping
     public ResponseEntity<HorarioFuncionamento> saveHorarioFuncionamento(@RequestBody @Valid HorarioFuncionamentoDto horarioFuncionamentoDto) {
-        var empresa = empresaService.findById(horarioFuncionamentoDto.getEmpresa());
-
-        var horarioFuncionamentoModel = new HorarioFuncionamento();
-        BeanUtils.copyProperties(horarioFuncionamentoDto, horarioFuncionamentoModel);
-        horarioFuncionamentoModel.setEmpresa(empresa);
-        return ResponseEntity.status(HttpStatus.CREATED).body(horarioFuncionamentoService.save(horarioFuncionamentoModel));
+        HorarioFuncionamento horarioFuncionamento = horarioFuncionamentoDto.convertDTOToEntity();
+        return ResponseEntity.status(HttpStatus.CREATED).body(horarioFuncionamentoService.save(horarioFuncionamento));
     }
 
     @GetMapping
@@ -60,12 +52,9 @@ public class HorarioFuncionamentoController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") Long id, @RequestBody @Valid HorarioFuncionamentoDto horarioFuncionamentoDto) {
         HorarioFuncionamento horarioFuncionamento = horarioFuncionamentoService.findById(id);
-
-        var horarioFuncionamentoModel = new HorarioFuncionamento();
-        BeanUtils.copyProperties(horarioFuncionamentoDto, horarioFuncionamentoModel);
-        horarioFuncionamentoModel.setId(horarioFuncionamento.getId());
-
-        return ResponseEntity.status(HttpStatus.OK).body(horarioFuncionamentoService.save(horarioFuncionamentoModel));
+        HorarioFuncionamento horarioFuncionamentoAtualizado = horarioFuncionamentoDto.convertDTOToEntity();
+        horarioFuncionamentoAtualizado.setId(horarioFuncionamento.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(horarioFuncionamentoService.save(horarioFuncionamentoAtualizado));
     }
 
 }

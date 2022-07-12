@@ -1,15 +1,14 @@
 package br.com.digitaLife.cardapioDigital.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "EMPRESA")
 public class Empresa extends VersionedEntity implements Serializable {
@@ -63,5 +62,8 @@ public class Empresa extends VersionedEntity implements Serializable {
     public Empresa() {
         this.idioma = "pt-BR";
         this.fusoHorario = "Z";
+    }
+    public Empresa(Long id) {
+        this.id = id;
     }
 }

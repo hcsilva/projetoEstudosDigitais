@@ -5,7 +5,7 @@ import br.com.digitaLife.cardapioDigital.dto.EnderecoDto;
 import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
 import br.com.digitaLife.cardapioDigital.model.Endereco;
 import br.com.digitaLife.cardapioDigital.repository.EnderecoRepository;
-import br.com.digitaLife.cardapioDigital.utils.ExceptionUtils;
+import br.com.digitaLife.cardapioDigital.exceptions.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

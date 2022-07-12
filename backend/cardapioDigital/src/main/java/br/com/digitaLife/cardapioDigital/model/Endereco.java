@@ -1,15 +1,15 @@
 package br.com.digitaLife.cardapioDigital.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ENDERECO")
 public class Endereco extends VersionedEntity implements Serializable {
@@ -19,8 +19,8 @@ public class Endereco extends VersionedEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_EMPRESA")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     private Empresa empresa;
 
     @Column(name = "LOGRADOURO")
