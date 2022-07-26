@@ -1,0 +1,1 @@
+delete from empresa where id = 999;

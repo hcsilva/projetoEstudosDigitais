@@ -1,0 +1,2 @@
+insert into empresa (id, razao_social, cnpj, descricao, site, telefone_contato, email, idioma, fuso) values
+(999, 'empresa teste', '12346', 'descricao empresa teste', 'wwww.empresateste.com.br', '(54)991786534', 'empresa@teste.com.br', 'PT', 'Z');
