@@ -36,7 +36,8 @@ public class ItemCategoria extends VersionedEntity implements Serializable {
     private String descricaoSimples;
 
     @Column(name = "FOTO")
-    private String foto;
+    @Lob
+    private byte[] foto;
 
     @Column(name = "PRECO")
     private BigDecimal preco;

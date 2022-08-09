@@ -1,0 +1,2 @@
+ALTER TABLE item_extras ADD COLUMN data_alteracao TIMESTAMP;
+ALTER TABLE item_extras ADD COLUMN data_criacao TIMESTAMP NOT NULL DEFAULT NOW();

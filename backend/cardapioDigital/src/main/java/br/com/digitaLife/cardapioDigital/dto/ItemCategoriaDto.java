@@ -5,6 +5,7 @@ import br.com.digitaLife.cardapioDigital.model.ItemCategoria;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,6 +37,8 @@ public class ItemCategoriaDto {
     private BigDecimal preco;
 
     public ItemCategoria convertDTOToEntity() {
-        return new ModelMapper().map(this, ItemCategoria.class);
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper.map(this, ItemCategoria.class);
     }
 }
