@@ -1,6 +1,5 @@
 package br.com.digitaLife.cardapioDigital.exceptions;
 
-import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
 import br.com.digitaLife.cardapioDigital.utils.MessageUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

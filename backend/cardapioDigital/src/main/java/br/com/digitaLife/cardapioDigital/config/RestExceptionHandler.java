@@ -4,6 +4,7 @@ import br.com.digitaLife.cardapioDigital.exceptions.ApiErrors;
 import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -39,6 +40,13 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity handleResponseStatusException(ResponseStatusException ex) {
+        String mensagemErro = ex.getReason();
+        HttpStatus codigoStatus = ex.getStatus();
+        ApiErrors apiErrors = new ApiErrors(mensagemErro);
+        return new ResponseEntity(apiErrors, codigoStatus);
+    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity handleUsernameNotFoundExceptionn(ResponseStatusException ex) {
         String mensagemErro = ex.getReason();
         HttpStatus codigoStatus = ex.getStatus();
         ApiErrors apiErrors = new ApiErrors(mensagemErro);
