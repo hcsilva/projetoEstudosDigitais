@@ -1,15 +1,17 @@
 package br.com.digitaLife.cardapioDigital.dto;
 
-import br.com.digitaLife.cardapioDigital.model.Categoria;
 import br.com.digitaLife.cardapioDigital.model.ItemCategoria;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
@@ -18,6 +20,8 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemCategoriaDto {
+
+    private static ModelMapper modelMapper = new ModelMapper();
 
     private Long id;
 
@@ -30,15 +34,17 @@ public class ItemCategoriaDto {
     @NotBlank(message = "{itemCategoria.descricaoDetalhada.campoObrigatorio}")
     private String descricaoDetalhada;
 
+    @Schema(description = "Descrição detalhada do prato")
     @NotBlank(message = "{itemCategoria.descricaoSimples.campoObrigatorio}")
     private String descricaoSimples;
 
+    @Schema(description ="Descrição Simples do prato")
     @NotNull(message = "{itemCategoria.preco.campoObrigatorio}")
     private BigDecimal preco;
 
     public ItemCategoria convertDTOToEntity() {
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper.map(this, ItemCategoria.class);
     }
 }
+
+

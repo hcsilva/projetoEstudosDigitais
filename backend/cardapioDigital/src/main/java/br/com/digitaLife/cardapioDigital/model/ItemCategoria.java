@@ -1,11 +1,22 @@
 package br.com.digitaLife.cardapioDigital.model;
 
-import lombok.*;
-import org.ietf.jgss.Oid;
-
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -21,23 +32,25 @@ public class ItemCategoria extends VersionedEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_CATEGORIA")
     private Categoria categoria;
+
+    @Column(name = "FOTO")
+    @Lob
+    private byte[] foto;
 
     @Column(name = "DESCRICAO_DETALHADA", length = 250)
     private String descricaoDetalhada;
 
     @Column(name = "DESCRICAO_SIMPLES", length = 100)
     private String descricaoSimples;
-
-    @Column(name = "FOTO")
-    @Lob
-    private byte[] foto;
 
     @Column(name = "PRECO")
     private BigDecimal preco;

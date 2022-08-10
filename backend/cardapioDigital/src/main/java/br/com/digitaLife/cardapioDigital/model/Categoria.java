@@ -33,7 +33,7 @@ public class Categoria extends VersionedEntity implements Serializable {
     private Empresa empresa;
 
     @Column(name = "DESCRICAO", length = 100)
-    private String descricao;
+    private String descricaoSimples;
 
     @Column(name = "DESCRICAO_DETALHADA", length = 250)
     private String descricaoDetalhada;

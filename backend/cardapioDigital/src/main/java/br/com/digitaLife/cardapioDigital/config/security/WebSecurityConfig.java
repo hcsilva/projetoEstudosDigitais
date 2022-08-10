@@ -19,7 +19,7 @@ public class WebSecurityConfig {
         http.httpBasic()
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET, "/api/empresa/**").hasRole(RoleNameEnum.USER.name())
+                .antMatchers(HttpMethod.GET, "/api/empresa/**").hasRole(RoleNameEnum.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
@@ -30,5 +30,4 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
