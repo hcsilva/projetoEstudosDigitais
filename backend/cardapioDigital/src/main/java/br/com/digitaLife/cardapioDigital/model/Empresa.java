@@ -22,7 +22,7 @@ public class Empresa extends VersionedEntity implements Serializable {
     private String razaoSocial;
 
     @Column(name = "CNPJ")
-    private Integer cnpj;
+    private String cnpj;
 
     @Column(name = "LOGO")
     @Lob

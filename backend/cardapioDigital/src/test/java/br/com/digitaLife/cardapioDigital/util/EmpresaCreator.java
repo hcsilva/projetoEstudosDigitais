@@ -2,26 +2,43 @@ package br.com.digitaLife.cardapioDigital.util;
 
 import br.com.digitaLife.cardapioDigital.dto.EmpresaDto;
 
+import br.com.digitaLife.cardapioDigital.model.Empresa;
 import java.io.IOException;
 
 public class EmpresaCreator {
+    public static final byte[] IMAGEM = getImageBytes();
 
+    public static EmpresaDto createEmpresaDtoForSave() {
+        return EmpresaDto.builder()
+                .cnpj("09464292000198")
+                .descricao("Empresa Teste Descrição")
+                .email("emailTeste@gmail.com")
+                .logo(IMAGEM)
+                .imagemCapa(IMAGEM)
+                .facebook("testeFacebookPage")
+                .instagram("testeInstagramPage")
+                .razaoSocial("Empresa teste Razão Social")
+                .site("www.empresateste.com.br")
+                .telefoneContato("54991875569")
+                .whatsapp("54991875569")
+                .build();
+    }
 
-    public static EmpresaDto createEmpresaForSave() throws IOException {
-        EmpresaDto empresaDto = new EmpresaDto();
-        empresaDto.setCnpj("09464292000198");
-        empresaDto.setDescricao("Empresa Teste Descrição");
-        empresaDto.setEmail("emailTeste@gmail.com");
-        empresaDto.setLogo(getImageBytes());
-        empresaDto.setImagemCapa(getImageBytes());
-        empresaDto.setFacebook("testeFacebookPage");
-        empresaDto.setInstagram("testeInstagramPage");
-        empresaDto.setRazaoSocial("Empresa teste Razão Social");
-        empresaDto.setSite("www.empresateste.com.br");
-        empresaDto.setTelefoneContato("54991875569");
-        empresaDto.setWhatsapp("54991875569");
-
-        return empresaDto;
+    public static Empresa validEmpresa() {
+        return Empresa.builder()
+                .id(1L)
+                .cnpj("09464292000198")
+                .descricao("Empresa Teste Descrição")
+                .email("emailTeste@gmail.com")
+                .logo(IMAGEM)
+                .imagemCapa(IMAGEM)
+                .facebook("testeFacebookPage")
+                .instagram("testeInstagramPage")
+                .razaoSocial("Empresa teste Razão Social")
+                .site("www.empresateste.com.br")
+                .telefoneContato("54991875569")
+                .whatsapp("54991875569")
+                .build();
     }
 
     private static byte[] getImageBytes() {

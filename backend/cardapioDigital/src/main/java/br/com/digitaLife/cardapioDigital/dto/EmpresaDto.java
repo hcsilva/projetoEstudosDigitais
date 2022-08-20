@@ -1,17 +1,17 @@
 package br.com.digitaLife.cardapioDigital.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 @Getter
 @Setter
+@Builder
 public class EmpresaDto {
 
     @NotEmpty(message = "{empresa.razaoSocial.campoObrigatorio}")
