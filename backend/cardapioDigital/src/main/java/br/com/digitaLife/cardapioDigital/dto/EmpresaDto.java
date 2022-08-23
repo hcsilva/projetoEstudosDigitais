@@ -3,8 +3,10 @@ package br.com.digitaLife.cardapioDigital.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -12,6 +14,8 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmpresaDto {
 
     @NotEmpty(message = "{empresa.razaoSocial.campoObrigatorio}")

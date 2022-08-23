@@ -51,7 +51,7 @@ public class EmpresaController {
     public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
         Empresa empresa = empresaService.findById(id);
         empresaService.delete(empresa);
-        return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
     }
 
     @PutMapping("/{id}")
