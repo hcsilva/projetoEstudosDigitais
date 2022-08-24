@@ -55,7 +55,7 @@ public class EmpresaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") Long id, @RequestBody @Valid EmpresaDto empresaDto) {
+    public ResponseEntity<Empresa> updateEmpresa(@PathVariable(value = "id") Long id, @RequestBody @Valid EmpresaDto empresaDto) {
         Empresa empresa = empresaService.findById(id);
 
         var empresaModel = new Empresa();

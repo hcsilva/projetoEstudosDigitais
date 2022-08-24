@@ -41,6 +41,35 @@ public class EmpresaCreator {
                 .build();
     }
 
+    public static EmpresaDto createEmpresaDtoToUpdate() {
+        return EmpresaDto.builder()
+                .cnpj("09464292000198")
+                .descricao("Empresa Teste Update")
+                .email("emailUpdateTeste@gmail.com")
+                .facebook("testeFacebookPageUpdate")
+                .instagram("testeInstagramPageUpdate")
+                .razaoSocial("Empresa Razão Social Update")
+                .site("www.empresatesteUpdate.com.br")
+                .telefoneContato("99999999999")
+                .whatsapp("888888888")
+                .build();
+    }
+
+
+    public static Empresa empresaUpdateValid() {
+        return Empresa.builder()
+                .cnpj("09464292000198")
+                .descricao("Empresa Teste Update")
+                .email("emailUpdateTeste@gmail.com")
+                .facebook("testeFacebookPageUpdate")
+                .instagram("testeInstagramPageUpdate")
+                .razaoSocial("Empresa Razão Social Update")
+                .site("www.empresatesteUpdate.com.br")
+                .telefoneContato("99999999999")
+                .whatsapp("888888888")
+                .build();
+    }
+
     private static byte[] getImageBytes() {
         final String path = "src/test/java/images/test_image.png";
         try {
