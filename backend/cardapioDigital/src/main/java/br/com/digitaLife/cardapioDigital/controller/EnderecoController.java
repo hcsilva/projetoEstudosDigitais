@@ -50,7 +50,7 @@ public class EnderecoController {
 
     @GetMapping("/cep/{cep}")
     @ResponseStatus(HttpStatus.OK)
-    public EnderecoDto getByCep(@PathVariable(value = "cep") String cep) {
+    public EnderecoDto getByCep(@PathVariable(value = "cep") Integer cep) {
         EnderecoDto enderecoDto = enderecoService.findByCep(cep);
 
         if (enderecoDto.getLogradouro() == null) {
@@ -65,11 +65,11 @@ public class EnderecoController {
         Endereco endereco = enderecoService.findById(id);
         enderecoService.delete(endereco);
 
-        return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("endereco.deletadoComSucesso"));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(MessageUtils.getMessage("endereco.deletadoComSucesso"));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id") Long id, @RequestBody @Valid EnderecoDto enderecoDto) {
+    public ResponseEntity<Endereco> updateEndereco(@PathVariable(value = "id") Long id, @RequestBody @Valid EnderecoDto enderecoDto) {
         Endereco endereco = enderecoService.findById(id);
 
         var enderecoModel = new Endereco();

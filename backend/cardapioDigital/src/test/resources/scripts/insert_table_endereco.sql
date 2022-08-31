@@ -1,0 +1,2 @@
+insert into endereco (id, id_empresa, cep, logradouro, numero, bairro, complemento, cidade, estado, pais) values
+(999, 999, '95010000', 'Avenida Julio de Castilhos', 100, 'Centro', 'Complemento', 'Caxias do Sal', 'RS', 'Brasil');

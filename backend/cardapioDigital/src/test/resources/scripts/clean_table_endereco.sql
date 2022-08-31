@@ -1,0 +1,1 @@
+delete from endereco where id = 999;

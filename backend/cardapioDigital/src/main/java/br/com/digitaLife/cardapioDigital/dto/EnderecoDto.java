@@ -3,8 +3,7 @@ package br.com.digitaLife.cardapioDigital.dto;
 import br.com.digitaLife.cardapioDigital.enums.PaisEnum;
 import br.com.digitaLife.cardapioDigital.model.Empresa;
 import br.com.digitaLife.cardapioDigital.model.Endereco;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,11 +11,13 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class EnderecoDto {
 
     @NotBlank(message = "{endereco.cep.campoObrigatorio}")
     @Size(max = 8, message = "{endereco.cep.tamanhoMaximoExcedido}")
-    private String cep;
+    private int cep;
 
     @NotBlank(message = "{endereco.logradouro.campoObrigatorio}")
     private String logradouro;

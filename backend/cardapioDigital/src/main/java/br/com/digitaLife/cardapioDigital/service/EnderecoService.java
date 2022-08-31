@@ -45,7 +45,7 @@ public class EnderecoService {
         enderecoRepository.delete(endereco);
     }
 
-    public EnderecoDto findByCep(String cep) {
+    public EnderecoDto findByCep(int cep) {
         validateCep(cep);
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(URL_BASE_VIA_CEP, cep);
@@ -63,12 +63,12 @@ public class EnderecoService {
     }
 
 
-    private void validateCep(String cep) {
-        if (StringUtils.isEmpty(cep)) {
+    private void validateCep(Integer cep) {
+        if (null == cep) {
             ExceptionUtils.throwsErrorExceptionMessage("endereco.cep.cepDeveEstarPreenchido");
         }
 
-        if (cep.trim().length() != 8) {
+        if ( 8 != cep.toString().length()) {
             ExceptionUtils.throwsErrorExceptionMessage("endereco.cep.tamanhoMaximoExcedido");
         }
     }
