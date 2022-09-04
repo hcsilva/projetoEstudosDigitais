@@ -7,6 +7,7 @@ import br.com.digitaLife.cardapioDigital.utils.MessageUtils;
 import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -50,7 +51,13 @@ public class EmpresaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
         Empresa empresa = empresaService.findById(id);
-        empresaService.delete(empresa);
+
+        try {
+            empresaService.delete(empresa);
+        }catch (DataIntegrityViolationException e){
+            throw new br.com.digitaLife.cardapioDigital.exceptions.DataIntegrityViolationException("empresa.naoPodeSerExcluidaPoisExistemDependencias");
+        }
+
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(MessageUtils.getMessage("empresa.deletadaComSucesso"));
     }
 

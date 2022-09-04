@@ -1,7 +1,10 @@
 package br.com.digitaLife.cardapioDigital.config;
 
 import br.com.digitaLife.cardapioDigital.exceptions.ApiErrors;
+import br.com.digitaLife.cardapioDigital.exceptions.DataIntegrityViolationException;
 import br.com.digitaLife.cardapioDigital.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,9 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -46,11 +46,17 @@ public class RestExceptionHandler {
         return new ResponseEntity(apiErrors, codigoStatus);
     }
     @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity handleUsernameNotFoundExceptionn(ResponseStatusException ex) {
+    public ResponseEntity handleUsernameNotFoundException(ResponseStatusException ex) {
         String mensagemErro = ex.getReason();
         HttpStatus codigoStatus = ex.getStatus();
         ApiErrors apiErrors = new ApiErrors(mensagemErro);
         return new ResponseEntity(apiErrors, codigoStatus);
     }
-
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity handleDataIntegratyViolationException(DataIntegrityViolationException ex){
+        String mensagemErro = ex.getMessage();
+        HttpStatus codigoStatus = HttpStatus.BAD_REQUEST;
+        ApiErrors apiErrors = new ApiErrors(mensagemErro);
+        return new ResponseEntity(apiErrors, codigoStatus);
+    }
 }

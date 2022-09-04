@@ -25,6 +25,18 @@ public class MessageUtils {
     }
 
 
+    public static String getMessageComSubstituicao(String message, String texto) {
+        if (StringUtils.isEmpty(message)) {
+            return StringUtils.EMPTY;
+        }
+
+        ResourceBundle bundle = ResourceBundle.getBundle("messages", new Locale(IdiomaEnum.PT.getIdioma(), IdiomaEnum.PT.getPais()));
+        var mensagem = bundle.getString(message);
+
+        return String.format(mensagem, texto);
+    }
+
+
     /**
      * Método Criado para conversão das mensagens para a linguagem utilizada no sistema
      * Necessário uma refatoração futura

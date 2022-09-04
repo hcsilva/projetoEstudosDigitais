@@ -2,10 +2,9 @@ package br.com.digitaLife.cardapioDigital.controller;
 
 import br.com.digitaLife.cardapioDigital.dto.HorarioFuncionamentoDto;
 import br.com.digitaLife.cardapioDigital.model.HorarioFuncionamento;
-import br.com.digitaLife.cardapioDigital.service.EmpresaService;
 import br.com.digitaLife.cardapioDigital.service.HorarioFuncionamentoService;
 import br.com.digitaLife.cardapioDigital.utils.MessageUtils;
-import org.springframework.beans.BeanUtils;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +12,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/horarioFuncionamento")
@@ -46,7 +48,7 @@ public class HorarioFuncionamentoController {
     public ResponseEntity<Object> deleteEmpresa(@PathVariable(value = "id") Long id) {
         HorarioFuncionamento horarioFuncionamento = horarioFuncionamentoService.findById(id);
         horarioFuncionamentoService.delete(horarioFuncionamento);
-        return ResponseEntity.status(HttpStatus.OK).body(MessageUtils.getMessage("horarioFuncionamento.deletadoComSucesso"));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(MessageUtils.getMessage("horarioFuncionamento.deletadoComSucesso"));
     }
 
     @PutMapping("/{id}")
