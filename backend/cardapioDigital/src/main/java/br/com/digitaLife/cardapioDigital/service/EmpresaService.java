@@ -33,10 +33,7 @@ public class EmpresaService {
                         () -> new ObjectNotFoundException("empresa.naoEncontrada")
                 );
     }
-
-    @Transactional
     public void delete(Empresa empresa) throws DataIntegrityViolationException {
         empresaRepository.delete(empresa);
     }
-
 }

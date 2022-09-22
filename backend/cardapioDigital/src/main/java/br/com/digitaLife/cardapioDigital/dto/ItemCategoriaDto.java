@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -38,9 +40,18 @@ public class ItemCategoriaDto {
     @NotBlank(message = "{itemCategoria.descricaoSimples.campoObrigatorio}")
     private String descricaoSimples;
 
-    @Schema(description ="Descrição Simples do prato")
+    @Schema(description = "Descrição Simples do prato")
     @NotNull(message = "{itemCategoria.preco.campoObrigatorio}")
     private BigDecimal preco;
+
+    private byte[] foto;
+    private BigDecimal precoMiniPrato;
+    private Integer serverQuantidadePessoas;
+    private boolean semLactose;
+    private boolean vegetariano;
+    private boolean semGluten;
+    private boolean vegano;
+    private boolean destaque;
 
     public ItemCategoria convertDTOToEntity() {
         return modelMapper.map(this, ItemCategoria.class);

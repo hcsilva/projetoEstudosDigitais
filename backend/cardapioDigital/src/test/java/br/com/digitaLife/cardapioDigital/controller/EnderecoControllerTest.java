@@ -1,32 +1,29 @@
 package br.com.digitaLife.cardapioDigital.controller;
 
-import br.com.digitaLife.cardapioDigital.dto.EmpresaDto;
 import br.com.digitaLife.cardapioDigital.dto.EnderecoDto;
-import br.com.digitaLife.cardapioDigital.model.Empresa;
 import br.com.digitaLife.cardapioDigital.model.Endereco;
-import br.com.digitaLife.cardapioDigital.service.EmpresaService;
 import br.com.digitaLife.cardapioDigital.service.EnderecoService;
-import br.com.digitaLife.cardapioDigital.util.EmpresaCreator;
 import br.com.digitaLife.cardapioDigital.util.EnderecoCreator;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 //@ActiveProfiles("teste")
@@ -41,6 +38,7 @@ class EnderecoControllerTest {
     @BeforeEach
     void setUp() {
         when(enderecoService.save(any())).thenReturn(EnderecoCreator.validEndereco());
+        when(enderecoService.findById(any())).thenReturn(EnderecoCreator.validEndereco());
     }
 
     @Test
